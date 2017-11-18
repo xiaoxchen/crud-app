@@ -12,7 +12,9 @@
   <tx:annotation-driven/>
 
   <jdbc:embedded-database id="dataSource">
-    <jdbc:script location="classpath:schema.sql" />
+    <jdbc:script location="classpath:mailingAddress.sql" />
+    <jdbc:script location="classpath:client.sql" />
+    <jdbc:script location="classpath:person.sql" />
     <jdbc:script location="classpath:data.sql" />
   </jdbc:embedded-database>
 

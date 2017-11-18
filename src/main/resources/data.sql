@@ -17,7 +17,7 @@ INSERT INTO person (
 ), (
     'Jane',
     'Smith',
-    'fake2@aquent.com',
+    'fa2@aquent.com',
     '123 Any St.',
     'Asheville',
     'NC',
