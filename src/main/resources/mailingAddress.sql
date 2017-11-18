@@ -8,6 +8,4 @@ CREATE TABLE mailing_address (
   line_3 VARCHAR(255) NULL,
   city VARCHAR(45) NOT NULL,
   state VARCHAR(45) NULL,
-  zipcode VARCHAR(45) NULL,
-  country VARCHAR(45) NOT NULL,
 );
