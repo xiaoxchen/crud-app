@@ -28,11 +28,12 @@ public class PersonJdbcDao implements PersonDao {
     private static final String SQL_READ_PERSON = "SELECT * FROM person WHERE person_id = :personId";
     private static final String SQL_DELETE_PERSON = "DELETE FROM person WHERE person_id = :personId";
     private static final String SQL_UPDATE_PERSON = "UPDATE person SET (first_name, last_name, email_address, street_address, city, state, zip_code, client_id)"
-                                                  + " = (:firstName, :lastName, :emailAddress, :streetAddress, :city, :state, :zipCode, :clientId)"
+                                                  + " = (:firstName, :lastName, :emailAddress, :streetAddress, :city, :state, :zipCode, :client_id)"
                                                   + " WHERE person_id = :personId";
-    private static final String SQL_CREATE_PERSON = "INSERT INTO person (first_name, last_name, email_address, street_address, city, state, zip_code)"
-                                                  + " VALUES (:firstName, :lastName, :emailAddress, :streetAddress, :city, :state, :zipCode)";
+    private static final String SQL_CREATE_PERSON = "INSERT INTO person (first_name, last_name, email_address, street_address, city, state, zip_code, client_id)"
+                                                  + " VALUES (:firstName, :lastName, :emailAddress, :streetAddress, :city, :state, :zipCode, :client_id)";
     private static final String SQL_UPDATE_CLIENT = "UPDATE person SET (client_id) = (:client_id) WHERE person_id = :personId";
+    private static final String SQL_READ_NUMBER_CLIENT = "SELECT count(*) FROM person WHERE client_id = :client_id";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -63,8 +64,14 @@ public class PersonJdbcDao implements PersonDao {
     public void updateClient(Integer clientId, Integer personId) {
         namedParameterJdbcTemplate.update(SQL_UPDATE_PERSON, Collections.unmodifiableMap(Stream.of(
                 new AbstractMap.SimpleEntry<>("personId", personId),
-                new AbstractMap.SimpleEntry<>("clientId", clientId)
+                new AbstractMap.SimpleEntry<>("client_id", clientId)
         ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()))));
+    }
+
+    @Override
+    public Integer countByClientId(Integer clientId) {
+        return namedParameterJdbcTemplate.queryForObject(SQL_READ_NUMBER_CLIENT,
+                Collections.singletonMap("client_id", clientId), Integer.class);
     }
 
     @Override
@@ -97,7 +104,7 @@ public class PersonJdbcDao implements PersonDao {
             person.setCity(rs.getString("city"));
             person.setState(rs.getString("state"));
             person.setZipCode(rs.getString("zip_code"));
-            person.setClientId(rs.getInt("client_id"));
+            person.setClient_id(rs.getInt("client_id"));
             return person;
         }
     }

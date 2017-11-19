@@ -50,7 +50,7 @@
             <input type="text" name="zipCode" value="${person.zipCode}"/>
             <br/>
             <label for="client_id">Client ID:</label>
-            <select path="clientId">
+            <select name="client_id">
                 <c:forEach var='item' items='${clientList}'>
                     <option value="<c:out value='${item.key}'/>"><c:out value='${item.value}'/></option>
                 </c:forEach>

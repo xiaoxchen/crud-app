@@ -2,6 +2,7 @@ package com.aquent.crudapp.controller;
 
 import com.aquent.crudapp.domain.Client;
 import com.aquent.crudapp.service.ClientService;
+import com.aquent.crudapp.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ public class ClientController {
 
     @Inject
     private ClientService clientService;
+    @Inject
+    private PersonService personService;
 
     /**
      * Renders the listing page.
@@ -125,10 +128,18 @@ public class ClientController {
      * @return redirect to the listing page
      */
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String delete(@RequestParam String command, @RequestParam Integer clientId) {
+    public ModelAndView delete(@RequestParam String command, @RequestParam Integer clientId) {
         if (COMMAND_DELETE.equals(command)) {
+            int count = personService.countByClientId(clientId);
+            if (count != 0){
+                ModelAndView mav = new ModelAndView("client/delete");
+                mav.addObject("client", clientService.readClient(clientId));
+                mav.addObject("error", true);
+                mav.addObject("count", count);
+                return mav;
+            }
             clientService.deleteClient(clientId);
         }
-        return "redirect:/client/list";
+        return new ModelAndView("redirect:/client/list");
     }
 }

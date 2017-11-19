@@ -18,7 +18,7 @@
 </head>
 <body>
 <h1>Client Listing</h1>
-<%--<p><a href="${pageContext.request.contextPath}/person/create">Create New Person</a></p>--%>
+<p><a href="${pageContext.request.contextPath}/client/create">Create New Client</a></p>
 <c:choose>
     <c:when test="${fn:length(clients) gt 0}">
         <table>

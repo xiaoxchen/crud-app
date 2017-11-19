@@ -18,8 +18,8 @@ import java.util.List;
 public class ClientJdbcDao implements ClientDao{
 
     private static final String SQL_LIST_CLIENTS = "SELECT * FROM client ORDER BY id, client_name";
-    private static final String SQL_READ_CLIENT = "SELECT * FROM client WHERE id = :clientId";
-    private static final String SQL_DELETE_CLIENT = "DELETE FROM client WHERE id = :clientId";
+    private static final String SQL_READ_CLIENT = "SELECT * FROM client WHERE id = :client_id";
+    private static final String SQL_DELETE_CLIENT = "DELETE FROM client WHERE id = :client_id";
     private static final String SQL_UPDATE_CLIENT = "UPDATE client SET (client_name, website_url, phone_number, line_1, " +
             "line_2, line_3, city, state, zipcode)"
             + " = (:client_name, :website_url, :phone_number, :line_1, :line_2, :line_3, :city, :state, :zipcode)"
@@ -50,7 +50,7 @@ public class ClientJdbcDao implements ClientDao{
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Client readClient(Integer clientId) {
-        return namedParameterJdbcTemplate.queryForObject(SQL_READ_CLIENT, Collections.singletonMap("clientId", clientId), new ClientRowMapper());
+        return namedParameterJdbcTemplate.queryForObject(SQL_READ_CLIENT, Collections.singletonMap("client_id", clientId), new ClientRowMapper());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ClientJdbcDao implements ClientDao{
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public void deleteClient(Integer clientId) {
-        namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT, Collections.singletonMap("clientId", clientId));
+        namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT, Collections.singletonMap("client_id", clientId));
     }
     /**
      * Row mapper for client records.

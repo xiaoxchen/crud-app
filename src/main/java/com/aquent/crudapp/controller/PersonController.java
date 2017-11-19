@@ -38,7 +38,7 @@ public class PersonController {
         ModelAndView mav = new ModelAndView("person/list");
         List<Person> people = personService.listPeople();
         for (Person person : people){
-            person.setClientName(clientService.readClient(person.getClientId()).getClient_name());
+            person.setClientName(clientService.readClient(person.getClient_id()).getClient_name());
         }
         mav.addObject("persons", people);
         return mav;

@@ -46,4 +46,6 @@ public interface PersonDao {
     void deletePerson(Integer id);
 
     void updateClient(Integer clientId, Integer personId);
+
+    Integer countByClientId(Integer clientId);
 }
