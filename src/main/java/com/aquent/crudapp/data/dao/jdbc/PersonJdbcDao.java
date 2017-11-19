@@ -2,8 +2,11 @@ package com.aquent.crudapp.data.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -29,6 +32,7 @@ public class PersonJdbcDao implements PersonDao {
                                                   + " WHERE person_id = :personId";
     private static final String SQL_CREATE_PERSON = "INSERT INTO person (first_name, last_name, email_address, street_address, city, state, zip_code)"
                                                   + " VALUES (:firstName, :lastName, :emailAddress, :streetAddress, :city, :state, :zipCode)";
+    private static final String SQL_UPDATE_CLIENT = "UPDATE person SET (client_id) = (:client_id) WHERE person_id = :personId";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -52,6 +56,15 @@ public class PersonJdbcDao implements PersonDao {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public void deletePerson(Integer personId) {
         namedParameterJdbcTemplate.update(SQL_DELETE_PERSON, Collections.singletonMap("personId", personId));
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    public void updateClient(Integer clientId, Integer personId) {
+        namedParameterJdbcTemplate.update(SQL_UPDATE_PERSON, Collections.unmodifiableMap(Stream.of(
+                new AbstractMap.SimpleEntry<>("personId", personId),
+                new AbstractMap.SimpleEntry<>("clientId", clientId)
+        ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()))));
     }
 
     @Override

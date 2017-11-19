@@ -49,6 +49,13 @@
             <label for="zipCode">Zip Code:</label>
             <input type="text" name="zipCode" value="${person.zipCode}"/>
             <br/>
+            <label for="client_id">Client ID:</label>
+            <select path="clientId">
+                <c:forEach var='item' items='${clientList}'>
+                    <option value="<c:out value='${item.key}'/>"><c:out value='${item.value}'/></option>
+                </c:forEach>
+            </select>
+            <br/>
             <input type="submit" name="Submit" value="Submit"/>
         </form>
     </body>

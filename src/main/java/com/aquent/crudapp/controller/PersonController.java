@@ -1,15 +1,16 @@
 package com.aquent.crudapp.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.aquent.crudapp.domain.Client;
+import com.aquent.crudapp.service.ClientService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aquent.crudapp.domain.Person;
@@ -25,6 +26,7 @@ public class PersonController {
     public static final String COMMAND_DELETE = "Delete";
 
     @Inject private PersonService personService;
+    @Inject private ClientService clientService;
 
     /**
      * Renders the listing page.
@@ -34,7 +36,11 @@ public class PersonController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView("person/list");
-        mav.addObject("persons", personService.listPeople());
+        List<Person> people = personService.listPeople();
+        for (Person person : people){
+            person.setClientName(clientService.readClient(person.getClientId()).getClient_name());
+        }
+        mav.addObject("persons", people);
         return mav;
     }
 
@@ -135,5 +141,14 @@ public class PersonController {
             personService.deletePerson(personId);
         }
         return "redirect:/person/list";
+    }
+
+    @ModelAttribute("clientList")
+    public Map<Integer, String> getClientList() {
+        Map<Integer, String> map = new HashMap<>();
+        for (Client client : clientService.listClient()){
+            map.put(client.getId(), client.getClient_name());
+        }
+        return map;
     }
 }

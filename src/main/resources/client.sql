@@ -6,5 +6,10 @@ CREATE TABLE client (
   client_name VARCHAR(45) NOT NULL,
   website_url VARCHAR(2083) NOT NULL,
   phone_number VARCHAR(20) NOT NULL,
-  mailing_address_id int FOREIGN KEY REFERENCES mailing_address(id)
+  line_1 VARCHAR(255) NOT NULL,
+  line_2 VARCHAR(255) NULL,
+  line_3 VARCHAR(255) NULL,
+  city VARCHAR(45) NOT NULL,
+  state VARCHAR(45) NOT NULL,
+  zipcode CHAR(5) NOT NULL
 );
