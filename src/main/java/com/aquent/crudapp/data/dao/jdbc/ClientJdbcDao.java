@@ -50,7 +50,7 @@ public class ClientJdbcDao implements ClientDao{
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Client readClient(Integer clientId) {
-        return namedParameterJdbcTemplate.queryForObject(SQL_READ_CLIENT, Collections.singletonMap("id", clientId), new ClientRowMapper());
+        return namedParameterJdbcTemplate.queryForObject(SQL_READ_CLIENT, Collections.singletonMap("clientId", clientId), new ClientRowMapper());
     }
 
     @Override
@@ -60,8 +60,8 @@ public class ClientJdbcDao implements ClientDao{
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public void deleteClient(Integer personId) {
-        namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT, Collections.singletonMap("personId", personId));
+    public void deleteClient(Integer clientId) {
+        namedParameterJdbcTemplate.update(SQL_DELETE_CLIENT, Collections.singletonMap("clientId", clientId));
     }
     /**
      * Row mapper for client records.

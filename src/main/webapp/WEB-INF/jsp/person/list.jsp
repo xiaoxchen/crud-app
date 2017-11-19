@@ -36,7 +36,7 @@
                                 <td>${person.firstName}</td>
                                 <td>${person.lastName}</td>
                                 <td>${person.emailAddress}</td>
-                                <td>${person.clientId}</td>
+                                <td>${person.clientName}</td>
                                 <td>
                                     <a href="${pageContext.request.contextPath}/person/edit/${person.personId}">Edit Person</a>
                                     <a href="${pageContext.request.contextPath}/person/delete/${person.personId}">Delete Person</a>
