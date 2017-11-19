@@ -1,19 +1,17 @@
 package com.aquent.crudapp.data.dao;
 
-import com.aquent.crudapp.domain.Person;
+import com.aquent.crudapp.domain.Client;
+
 import java.util.List;
 
-/**
- * Operations on the "person" table.
- */
-public interface PersonDao {
-
+public interface ClientDao {
+    // TODO change java doc
     /**
      * Retrieves all of the person records.
      *
      * @return list of person records
      */
-    List<Person> listPeople();
+    List<Client> listClient();
 
     /**
      * Creates a new person record.
@@ -21,7 +19,7 @@ public interface PersonDao {
      * @param person the values to save
      * @return the new person ID
      */
-    Integer createPerson(Person person);
+    Integer createClient(Client client);
 
     /**
      * Retrieves a person record by ID.
@@ -29,23 +27,19 @@ public interface PersonDao {
      * @param id the person ID
      * @return the person record
      */
-    Person readPerson(Integer id);
+    Client readClient(Integer id);
 
     /**
      * Updates an existing person record.
      *
      * @param person the new values to save
      */
-    void updatePerson(Person person);
+    void updateClient(Client client);
 
     /**
      * Deletes a person record by ID.
      *
      * @param id the person ID
      */
-    void deletePerson(Integer id);
-
-    void updateClient(Integer clientId, Integer personId);
-
-    Integer countByClientId(Integer clientId);
+    void deleteClient(Integer id);
 }

@@ -70,4 +70,9 @@ public class DefaultPersonService implements PersonService {
         Collections.sort(errors);
         return errors;
     }
+
+    @Override
+    public Integer countByClientId(Integer clientId) {
+        return personDao.countByClientId(clientId);
+    }
 }

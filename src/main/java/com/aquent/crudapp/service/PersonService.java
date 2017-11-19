@@ -53,4 +53,6 @@ public interface PersonService {
      * @return list of error messages
      */
     List<String> validatePerson(Person person);
+
+    Integer countByClientId(Integer clientId);
 }
