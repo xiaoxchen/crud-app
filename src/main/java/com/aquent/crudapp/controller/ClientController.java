@@ -1,6 +1,8 @@
 package com.aquent.crudapp.controller;
 
 import com.aquent.crudapp.domain.Client;
+import com.aquent.crudapp.domain.Pair;
+import com.aquent.crudapp.domain.Person;
 import com.aquent.crudapp.service.ClientService;
 import com.aquent.crudapp.service.PersonService;
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("client")
@@ -81,6 +84,24 @@ public class ClientController {
     public ModelAndView edit(@PathVariable Integer clientId) {
         ModelAndView mav = new ModelAndView("client/edit");
         mav.addObject("client", clientService.readClient(clientId));
+        Set<Integer> ids = new HashSet<>(personService.getPersonIdByClientId(clientId));
+        List<Integer> allIds = personService.listPeople().stream()
+                .mapToInt((e) -> e.getPersonId()).boxed().collect(Collectors.toList());
+        Map<Integer, Pair> map = Collections.unmodifiableMap(allIds.stream().collect(Collectors.toMap(
+                (e) -> e.intValue(),
+                (e) -> {
+                    if (ids.contains(e)){
+                        return new Pair(personService.readPerson(e).getFirstName() + " "+ personService.readPerson(e).getLastName(),
+                                true);
+                    }
+                    else {
+                        return new Pair(personService.readPerson(e).getFirstName() + " "+ personService.readPerson(e).getLastName(),
+                                false);
+                    }
+                }
+        )));
+        mav.addObject("employee", ids);
+        mav.addObject("people", map);
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }
@@ -94,10 +115,20 @@ public class ClientController {
      * @return redirect, or edit view with errors
      */
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public ModelAndView edit(Client client) {
+    public ModelAndView edit(Client client, @RequestParam("checkbox")String[] checkboxValue) {
         List<String> errors = clientService.validateClient(client);
         if (errors.isEmpty()) {
             clientService.updateClient(client);
+            Set<Integer> set = Arrays.stream(checkboxValue)
+                    .mapToInt((e) -> Integer.parseInt(e)).boxed().collect(Collectors.toSet());
+            for (Person person : personService.listPeople()){
+                if (set.contains(person.getPersonId())){
+                    personService.updateClient(client.getId(), person.getPersonId());
+                }
+                else if (Integer.compare(person.getClient_id(), client.getId()) == 0){
+                    personService.updateClient(0, person.getPersonId());
+                }
+            }
             return new ModelAndView("redirect:/client/list");
         } else {
             ModelAndView mav = new ModelAndView("client/edit");

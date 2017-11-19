@@ -48,4 +48,6 @@ public interface PersonDao {
     void updateClient(Integer clientId, Integer personId);
 
     Integer countByClientId(Integer clientId);
+
+    List<Integer> getPersonIdByClientId(Integer clientId);
 }

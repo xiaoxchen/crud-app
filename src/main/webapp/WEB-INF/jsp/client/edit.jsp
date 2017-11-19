@@ -56,6 +56,13 @@
     <label for="zipcode">Zip Code:</label>
     <input type="text" name="zipcode" value="${client.zipcode}"/>
     <br/>
+    <label for="client_id">Client ID:</label>
+        <c:forEach var='item' items='${people}'>
+            <input type="checkbox" name="checkbox" value="<c:out value='${item.key}'/>" ${item.value.bool eq true ? 'checked' : ''}>
+                <c:out value='${item.value.str}'/>
+            </input>
+        </c:forEach>
+    <br/>
     <input type="submit" name="Submit" value="Submit"/>
 </form>
 </body>

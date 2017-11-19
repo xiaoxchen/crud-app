@@ -57,3 +57,20 @@ INSERT INTO person (
     '28801',
     '2'
 );
+INSERT INTO person (
+    first_name,
+    last_name,
+    email_address,
+    street_address,
+    city,
+    state,
+    zip_code
+) VALUES (
+    'John',
+    'Smith',
+    'fake1@aquent.com',
+    '123 Any St.',
+    'Asheville',
+    'NC',
+    '28801'
+);

@@ -38,6 +38,9 @@ public class PersonController {
         ModelAndView mav = new ModelAndView("person/list");
         List<Person> people = personService.listPeople();
         for (Person person : people){
+            if (person.getClient_id() == 0){
+                continue;
+            }
             person.setClientName(clientService.readClient(person.getClient_id()).getClient_name());
         }
         mav.addObject("persons", people);
@@ -105,7 +108,7 @@ public class PersonController {
     public ModelAndView edit(Person person) {
         List<String> errors = personService.validatePerson(person);
         if (errors.isEmpty()) {
-            personService.updatePerson(person);
+            personService.updatePerson(person);;
             return new ModelAndView("redirect:/person/list");
         } else {
             ModelAndView mav = new ModelAndView("person/edit");

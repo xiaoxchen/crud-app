@@ -72,7 +72,17 @@ public class DefaultPersonService implements PersonService {
     }
 
     @Override
+    public void updateClient(Integer clientId, Integer personId) {
+        personDao.updateClient(clientId, personId);
+    }
+
+    @Override
     public Integer countByClientId(Integer clientId) {
         return personDao.countByClientId(clientId);
+    }
+
+    @Override
+    public List<Integer> getPersonIdByClientId(Integer clientId) {
+        return personDao.getPersonIdByClientId(clientId);
     }
 }

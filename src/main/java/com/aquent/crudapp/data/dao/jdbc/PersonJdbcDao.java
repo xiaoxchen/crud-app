@@ -34,6 +34,7 @@ public class PersonJdbcDao implements PersonDao {
                                                   + " VALUES (:firstName, :lastName, :emailAddress, :streetAddress, :city, :state, :zipCode, :client_id)";
     private static final String SQL_UPDATE_CLIENT = "UPDATE person SET (client_id) = (:client_id) WHERE person_id = :personId";
     private static final String SQL_READ_NUMBER_CLIENT = "SELECT count(*) FROM person WHERE client_id = :client_id";
+    private static final String SQL_READ_CLIENT = "SELECT person_id FROM person WHERE client_id = :client_id";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -62,7 +63,7 @@ public class PersonJdbcDao implements PersonDao {
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public void updateClient(Integer clientId, Integer personId) {
-        namedParameterJdbcTemplate.update(SQL_UPDATE_PERSON, Collections.unmodifiableMap(Stream.of(
+        namedParameterJdbcTemplate.update(SQL_UPDATE_CLIENT, Collections.unmodifiableMap(Stream.of(
                 new AbstractMap.SimpleEntry<>("personId", personId),
                 new AbstractMap.SimpleEntry<>("client_id", clientId)
         ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()))));
@@ -71,6 +72,12 @@ public class PersonJdbcDao implements PersonDao {
     @Override
     public Integer countByClientId(Integer clientId) {
         return namedParameterJdbcTemplate.queryForObject(SQL_READ_NUMBER_CLIENT,
+                Collections.singletonMap("client_id", clientId), Integer.class);
+    }
+
+    @Override
+    public List<Integer> getPersonIdByClientId(Integer clientId) {
+        return namedParameterJdbcTemplate.queryForList(SQL_READ_CLIENT,
                 Collections.singletonMap("client_id", clientId), Integer.class);
     }
 

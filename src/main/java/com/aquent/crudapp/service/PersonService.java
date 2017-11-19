@@ -54,5 +54,9 @@ public interface PersonService {
      */
     List<String> validatePerson(Person person);
 
+    void updateClient(Integer clientId, Integer personId);
+
     Integer countByClientId(Integer clientId);
+
+    List<Integer> getPersonIdByClientId(Integer clientId);
 }

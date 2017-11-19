@@ -37,15 +37,15 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item active px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="#client">Client
+                        <a class="nav-link text-uppercase text-expanded" href="/person/list">Person
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="#person">Person</a>
+                        <a class="nav-link text-uppercase text-expanded" href="/client/list">Client</a>
                     </li>
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="#About">about</a>
+                        <a class="nav-link text-uppercase text-expanded" href="/about">about</a>
                     </li>
                 </ul>
             </div>
@@ -58,20 +58,23 @@
 
         <c:choose>
             <c:when test="${fn:length(persons) gt 0}">
-                <table cellspacing="0">
-                    <tbody>
+                <table>
+                    <thead>
                     <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email Address</th>
+                        <th>Client</th>
                         <th>Actions</th>
                     </tr>
-
+                    </thead>
+                    <tbody>
                     <c:forEach items="${persons}" var="person">
                         <tr>
                             <td>${person.firstName}</td>
                             <td>${person.lastName}</td>
                             <td>${person.emailAddress}</td>
+                            <td>${person.clientName}</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/person/edit/${person.personId}">Edit Person</a>
                                 <a href="${pageContext.request.contextPath}/person/delete/${person.personId}">Delete Person</a>
