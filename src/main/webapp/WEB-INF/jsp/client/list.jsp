@@ -125,7 +125,8 @@
                         <td>${client.client_name}</td>
                         <td>${client.website_url}</td>
                         <td>${client.phone_number}</td>
-                        <td><button class="details" data-para1="${employeeName[client.id.intValue()]}">
+                        <td><button class="details" data-para1="${employeeName[client.id.intValue()]}"
+                                    <c:if test="${employee[client.id.intValue()] eq 0}"> disabled</c:if>>
                                 ${employee[client.id.intValue()]}</button></td>
                         <td>
                             <a href="${pageContext.request.contextPath}/client/edit/${client.id}">Edit Client</a>
