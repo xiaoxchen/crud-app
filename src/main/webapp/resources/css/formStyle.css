@@ -53,10 +53,6 @@ h1 {
     margin:50px 0px 0px 0px
 }
 
-.checkbox ,input {
-
-}
-
 input {
     border-radius: 0px 5px 5px 0px;
     border: 1px solid #eee;
@@ -133,11 +129,13 @@ i {
     padding: 0px 0px 0px 15px;
 }
 
-.error ,label {
+.error {
+    display:none;
+    margin: 0 0 10px;
+    font-weight:400;
+    font-size:13px;
     color: #DE5959;
 }
-
-
 
 #sendmessage {
     border:1px solid #fff;
