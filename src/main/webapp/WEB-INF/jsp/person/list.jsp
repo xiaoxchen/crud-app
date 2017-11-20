@@ -38,15 +38,16 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active px-lg-4">
-                            <a class="nav-link text-uppercase text-expanded" href="#client">Client
+                            <a class="nav-link text-uppercase text-expanded" href="/person/list">Person
+                            </a>
+                        </li>
+                        <li class="nav-item px-lg-4">
+                            <a class="nav-link text-uppercase text-expanded" href="/client/list">Client
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item px-lg-4">
-                            <a class="nav-link text-uppercase text-expanded" href="#person">Person</a>
-                        </li>
-                        <li class="nav-item px-lg-4">
-                            <a class="nav-link text-uppercase text-expanded" href="#About">about</a>
+                            <a class="nav-link text-uppercase text-expanded" href="/about">about</a>
                         </li>
                     </ul>
                 </div>

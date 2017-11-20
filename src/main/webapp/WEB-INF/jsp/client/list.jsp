@@ -22,7 +22,7 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/tableStyle.css">
     <link href="/resources/css/business-casual.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
@@ -41,19 +41,7 @@
     <title>Person Listing</title>
     <script>
         $( function() {
-            var dialog, form,
-
-                // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-                emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-                name = $( "#name" ),
-                email = $( "#email" ),
-                password = $( "#password" ),
-                allFields = $( [] ).add( name ).add( email ).add( password ),
-                tips = $( ".validateTips" );
-
-            function addUser() {
-
-            }
+            var dialog, form;
 
             dialog = $( "#dialog-form" ).dialog({
                 autoOpen: false,
@@ -72,7 +60,6 @@
 
             form = dialog.find( "form" ).on( "submit", function( event ) {
                 event.preventDefault();
-                addUser();
             });
 
             $('.details').click(function(){
