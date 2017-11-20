@@ -67,6 +67,7 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th>Company</th>
                             <th>Actions</th>
                         </tr>
 
@@ -76,6 +77,7 @@
                                 <td>${person.firstName}</td>
                                 <td>${person.lastName}</td>
                                 <td>${person.emailAddress}</td>
+                                <td>${person.clientName}</td>
                                 <td>
                                     <a href="${pageContext.request.contextPath}/person/edit/${person.personId}">Edit Person</a>
                                     <a href="${pageContext.request.contextPath}/person/delete/${person.personId}">Delete Person</a>

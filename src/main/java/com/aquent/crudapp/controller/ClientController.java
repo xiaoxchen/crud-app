@@ -57,6 +57,14 @@ public class ClientController {
     public ModelAndView create() {
         ModelAndView mav = new ModelAndView("client/create");
         mav.addObject("client", new Client());
+        List<Integer> allIds = personService.listPeople().stream()
+                .mapToInt((e) -> e.getPersonId()).boxed().collect(Collectors.toList());
+        Map<Integer, Pair> map = Collections.unmodifiableMap(allIds.stream().collect(Collectors.toMap(
+                (e) -> e.intValue(),
+                (e) -> new Pair(personService.readPerson(e).getFirstName() + " "+ personService.readPerson(e).getLastName(),
+                        false)
+        )));
+        mav.addObject("people", map);
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }
@@ -70,10 +78,20 @@ public class ClientController {
      * @return redirect, or create view with errors
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public ModelAndView create(Client client) {
+    public ModelAndView create(Client client, @RequestParam("checkbox")String[] checkboxValue) {
         List<String> errors = clientService.validateClient(client);
         if (errors.isEmpty()) {
-            clientService.createClient(client);
+            int id = clientService.createClient(client);
+            Set<Integer> set = Arrays.stream(checkboxValue)
+                    .mapToInt((e) -> Integer.parseInt(e)).boxed().collect(Collectors.toSet());
+            for (Person person : personService.listPeople()){
+                if (set.contains(person.getPersonId())){
+                    personService.updateClient(id, person.getPersonId());
+                }
+                else if (Integer.compare(person.getClient_id(), id) == 0){
+                    personService.updateClient(0, person.getPersonId());
+                }
+            }
             return new ModelAndView("redirect:/client/list");
         } else {
             ModelAndView mav = new ModelAndView("client/create");
