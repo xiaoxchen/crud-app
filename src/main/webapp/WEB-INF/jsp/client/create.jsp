@@ -52,7 +52,8 @@
             <div class="form-group">
                 <p for="phone_number">Phone Number:<span>*</span></p>
                 <span class="icon-case"><i class="fa fa-envelope-o" style="line-height: 40px"></i></span>
-                <input type="text" name="phone_number" value="${client.phone_number}" data-rule-digits="ture" data-rule-required="true"
+                <input type="text" name="phone_number" value="${client.phone_number}" data-rule-digits="ture" data-rule-rangelength="10,10"
+                       data-rule-required="true"
                        data-msg-required=" Required."/>
             </div>
 

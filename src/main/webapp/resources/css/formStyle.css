@@ -122,6 +122,10 @@ i {
     padding: 0px 15px 0px 0px;
 }
 
+.error ,label {
+    color: #DE5959;
+}
+
 .rightcontact {
     width:49.5%;
     float:right;
@@ -129,13 +133,6 @@ i {
     padding: 0px 0px 0px 15px;
 }
 
-.error {
-    display:none;
-    margin: 0 0 10px;
-    font-weight:400;
-    font-size:13px;
-    color: #DE5959;
-}
 
 #sendmessage {
     border:1px solid #fff;
