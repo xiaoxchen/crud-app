@@ -9,8 +9,8 @@
 <%@taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -24,8 +24,68 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
     <link href="/resources/css/business-casual.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        label, input { display:block; }
+        input.text { margin-bottom:12px; width:95%; padding: .4em; }
+        fieldset { padding:0; border:0; margin-top:25px; }
+        h1 { font-size: 1.2em; margin: .6em 0; }
+        div#users-contain { width: 350px; margin: 20px 0; }
+        div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+        div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+        .ui-dialog .ui-state-error { padding: .3em; }
+        .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Person Listing</title>
+    <script>
+        $( function() {
+            var dialog, form,
+
+                // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+                emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                name = $( "#name" ),
+                email = $( "#email" ),
+                password = $( "#password" ),
+                allFields = $( [] ).add( name ).add( email ).add( password ),
+                tips = $( ".validateTips" );
+
+            function addUser() {
+
+            }
+
+            dialog = $( "#dialog-form" ).dialog({
+                autoOpen: false,
+                height: 400,
+                width: 350,
+                modal: true,
+                buttons: {
+                    Cancel: function() {
+                        dialog.dialog( "close" );
+                    }
+                },
+                close: function() {
+                    $('.test').text("");
+                }
+            });
+
+            form = dialog.find( "form" ).on( "submit", function( event ) {
+                event.preventDefault();
+                addUser();
+            });
+
+            $('.details').click(function(){
+                var $this = $(this);
+                var para1 = $this.attr('data-para1');
+                $('.test').text("");
+                for (i = 0; i < para1.length; ++i){
+                    $('.test').append(para1[i]);
+                }
+                dialog.dialog("open");
+            });
+        } );
+    </script>
 </head>
 <body class="bgpic">
 <div class="tagline-upper text-center text-heading text-shadow text-white mt-5 d-none d-lg-block">Business Casual</div>
@@ -41,11 +101,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item active px-lg-4">
+                <li class="nav-item px-lg-4">
                     <a class="nav-link text-uppercase text-expanded" href="/person/list">Person
                     </a>
                 </li>
-                <li class="nav-item px-lg-4">
+                <li class="nav-item active px-lg-4">
                     <a class="nav-link text-uppercase text-expanded" href="/client/list">Client
                         <span class="sr-only">(current)</span>
                     </a>
@@ -68,6 +128,7 @@
                     <th>Client Name</th>
                     <th>Website</th>
                     <th>Phone</th>
+                    <th>Contacts</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -77,6 +138,8 @@
                         <td>${client.client_name}</td>
                         <td>${client.website_url}</td>
                         <td>${client.phone_number}</td>
+                        <td><button class="details" data-para1="${employeeName[client.id.intValue()]}">
+                                ${employee[client.id.intValue()]}</button></td>
                         <td>
                             <a href="${pageContext.request.contextPath}/client/edit/${client.id}">Edit Client</a>
                             <a href="${pageContext.request.contextPath}/client/delete/${client.id}">Delete Client</a>
@@ -90,6 +153,10 @@
             <p>No results found.</p>
         </c:otherwise>
     </c:choose>
+</div>
+<div id="dialog-form" title="Create new user">
+    <p><strong>Employee Name:</strong></p>
+    <p class="test"></p>
 </div>
 </body>
 </html>

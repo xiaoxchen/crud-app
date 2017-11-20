@@ -50,4 +50,6 @@ public interface PersonDao {
     Integer countByClientId(Integer clientId);
 
     List<Integer> getPersonIdByClientId(Integer clientId);
+
+    List<Person> getPersonByClientId(Integer clientId);
 }

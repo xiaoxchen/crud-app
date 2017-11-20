@@ -85,4 +85,9 @@ public class DefaultPersonService implements PersonService {
     public List<Integer> getPersonIdByClientId(Integer clientId) {
         return personDao.getPersonIdByClientId(clientId);
     }
+
+    @Override
+    public List<Person> getPersonByClientId(Integer clientId) {
+        return personDao.getPersonByClientId(clientId);
+    }
 }

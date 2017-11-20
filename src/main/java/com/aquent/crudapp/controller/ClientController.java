@@ -35,7 +35,16 @@ public class ClientController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView("client/list");
-        mav.addObject("clients", clientService.listClient());
+        List<Client> clients = clientService.listClient();
+        mav.addObject("clients", clients);
+        Map<Integer, Integer> map = Collections.unmodifiableMap(clients.stream()
+                .collect(Collectors.toMap((e) -> e.getId(), (e) -> personService.countByClientId(e.getId()))));
+        Map<Integer, List<String>> employeeName = Collections.unmodifiableMap(clients.stream()
+                .collect(Collectors.toMap((e) -> e.getId(),
+                        (e) -> personService.getPersonByClientId(e.getId()).stream()
+                .map((k) -> k.getFirstName() + " " + k.getLastName()).collect(Collectors.toList()))));
+        mav.addObject("employeeName", employeeName);
+        mav.addObject("employee", map);
         return mav;
     }
 

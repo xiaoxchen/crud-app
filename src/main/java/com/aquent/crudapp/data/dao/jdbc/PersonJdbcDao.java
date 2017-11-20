@@ -35,6 +35,7 @@ public class PersonJdbcDao implements PersonDao {
     private static final String SQL_UPDATE_CLIENT = "UPDATE person SET (client_id) = (:client_id) WHERE person_id = :personId";
     private static final String SQL_READ_NUMBER_CLIENT = "SELECT count(*) FROM person WHERE client_id = :client_id";
     private static final String SQL_READ_CLIENT = "SELECT person_id FROM person WHERE client_id = :client_id";
+    private static final String SQL_READ_ALL = "SELECT * FROM person WHERE client_id = :client_id";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -79,6 +80,12 @@ public class PersonJdbcDao implements PersonDao {
     public List<Integer> getPersonIdByClientId(Integer clientId) {
         return namedParameterJdbcTemplate.queryForList(SQL_READ_CLIENT,
                 Collections.singletonMap("client_id", clientId), Integer.class);
+    }
+
+    @Override
+    public List<Person> getPersonByClientId(Integer clientId) {
+        return namedParameterJdbcTemplate.query(SQL_READ_ALL,
+                Collections.singletonMap("client_id", clientId), new PersonRowMapper());
     }
 
     @Override
