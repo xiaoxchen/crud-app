@@ -54,11 +54,35 @@ public interface PersonService {
      */
     List<String> validatePerson(Person person);
 
+    /**
+     * Update client and contact relationship
+     *
+     * @param clientId
+     * @param personId
+     */
     void updateClient(Integer clientId, Integer personId);
 
+    /**
+     * Count how many contacts of one client
+     *
+     * @param clientId
+     * @return number of contacts
+     */
     Integer countByClientId(Integer clientId);
 
+    /**
+     * Get all contacts ids of one client
+     *
+     * @param clientId
+     * @return list of contact ids
+     */
     List<Integer> getPersonIdByClientId(Integer clientId);
 
+    /**
+     * Get all contacts object of one client
+     *
+     * @param clientId
+     * @return list of Person object
+     */
     List<Person> getPersonByClientId(Integer clientId);
 }

@@ -5,41 +5,40 @@ import com.aquent.crudapp.domain.Client;
 import java.util.List;
 
 public interface ClientDao {
-    // TODO change java doc
     /**
-     * Retrieves all of the person records.
+     * Retrieves all of the client records.
      *
-     * @return list of person records
+     * @return list of client records
      */
     List<Client> listClient();
 
     /**
-     * Creates a new person record.
+     * Creates a new client record.
      *
-     * @param person the values to save
-     * @return the new person ID
+     * @param client the values to save
+     * @return the new client ID
      */
     Integer createClient(Client client);
 
     /**
-     * Retrieves a person record by ID.
+     * Retrieves a client record by ID.
      *
-     * @param id the person ID
-     * @return the person record
+     * @param id the client ID
+     * @return the client record
      */
     Client readClient(Integer id);
 
     /**
-     * Updates an existing person record.
+     * Updates an existing client record.
      *
-     * @param person the new values to save
+     * @param client the new values to save
      */
     void updateClient(Client client);
 
     /**
-     * Deletes a person record by ID.
+     * Deletes a client record by ID.
      *
-     * @param id the person ID
+     * @param id the client ID
      */
     void deleteClient(Integer id);
 }

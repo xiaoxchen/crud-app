@@ -42,6 +42,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Client Listing</title>
+    <!-- jquery dialog for contacts details -->
     <script>
         $( function() {
             var dialog, form;

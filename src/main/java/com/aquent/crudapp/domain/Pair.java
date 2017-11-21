@@ -1,5 +1,8 @@
 package com.aquent.crudapp.domain;
 
+/**
+ * The Pair entity is used to display contacts details of client
+ */
 public class Pair{
     String str;
     boolean bool;

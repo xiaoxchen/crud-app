@@ -146,6 +146,11 @@ public class PersonController {
         return "redirect:/person/list";
     }
 
+    /**
+     * Default attribute of person page
+     *
+     * @return map of client id with client name
+     */
     @ModelAttribute("clientList")
     public Map<Integer, String> getClientList() {
         Map<Integer, String> map = new HashMap<>();
