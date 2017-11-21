@@ -76,3 +76,9 @@ hr.divider {
 .map-container iframe.clicked {
   pointer-events: auto;
 }
+
+.boxStyle {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 0;
+}

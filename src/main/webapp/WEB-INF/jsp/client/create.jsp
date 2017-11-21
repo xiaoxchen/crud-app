@@ -102,17 +102,15 @@
                 <span class="icon-case"><i class="fa fa-building-o" style="line-height: 40px"></i></span>
                 <input type="text" name="line_2" value="${client.line_2}"/>
             </div>
+        </div>
 
+        <%--right--%>
+        <div class="rightcontact">
             <div class="form-group">
                 <p for="line_3">Street Address3:</p>
                 <span class="icon-case"><i class="fa fa-building" style="line-height: 40px"></i></span>
                 <input type="text" name="line_3" value="${client.line_3}"/>
             </div>
-        </div>
-
-        <%--right--%>
-        <div class="rightcontact">
-
             <div class="form-group">
                 <p for="city">City:<span>*</span></p>
                 <span class="icon-case"><i class="fa fa-map-marker" style="line-height: 40px"></i></span>
@@ -133,12 +131,12 @@
             </div>
             <div class="form-group">
                 <p for="client_id">Contacts:</p>
-                <span class="icon-case"><i class="fa fa-home" style="line-height: 40px"></i></span>
-                <c:forEach var='item' items='${people}'>
-                    <input type="checkbox" name="checkbox" value="<c:out value='${item.key}'/>" ${item.value.bool eq true ? 'checked' : ''}>
-                    <c:out value='${item.value.str}'/>
-                    </input>
-                </c:forEach>
+                    <c:forEach var='item' items='${people}'>
+                        <input type="checkbox" class="boxStyle" name="checkbox" value="<c:out value='${item.key}'/>" ${item.value.bool eq true ? 'checked' : ''}>
+                        <c:out value='${item.value.str}'/>
+                        <br>
+                        </input>
+                    </c:forEach>
             </div>
         </div>
 
