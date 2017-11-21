@@ -134,6 +134,7 @@
                     <input class="boxStyle" type="checkbox" name="checkbox" value="<c:out value='${item.key}'/>" ${item.value.bool eq true ? 'checked' : ''}>
                     <c:out value='${item.value.str}'/>
                     </input>
+                    <br>
                 </c:forEach>
             </div>
         </div>
