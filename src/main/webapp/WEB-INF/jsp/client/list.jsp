@@ -15,16 +15,19 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="/resources/js/avatar.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="/resources/css/tableStyle.css">
-    <link href="/resources/css/business-casual.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/business-casual.css" >
+    <link rel="stylesheet" href="/resources/css/buttonStyle.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         label, input { display:block; }
         input.text { margin-bottom:12px; width:95%; padding: .4em; }
@@ -38,7 +41,7 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <title>Person Listing</title>
+    <title>Client Listing</title>
     <script>
         $( function() {
             var dialog, form;
@@ -105,8 +108,13 @@
     </div>
 </nav>
 <div class="table-users">
-    <div class="header">Person Listing</div>
-    <a href="${pageContext.request.contextPath}/client/create">Create New Client</a>
+    <div class="header">Client Listing</div>
+    <div class="text-center">
+        <div class="button">
+            <a href="${pageContext.request.contextPath}/client/create "><span class="shift">Create New Client ›</span></a>
+            <div class="mask"></div>
+        </div>
+    </div>
     <c:choose>
         <c:when test="${fn:length(clients) gt 0}">
             <table>
@@ -129,8 +137,14 @@
                                     <c:if test="${employee[client.id.intValue()] eq 0}"> disabled</c:if>>
                                 ${employee[client.id.intValue()]}</button></td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/client/edit/${client.id}">Edit Client</a>
-                            <a href="${pageContext.request.contextPath}/client/delete/${client.id}">Delete Client</a>
+                            <a class="btn aicon btn-default btn-sm"
+                               href="${pageContext.request.contextPath}/client/edit/${client.id}">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn aicon btn-default btn-sm"
+                               href="${pageContext.request.contextPath}/client/delete/${client.id}">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>

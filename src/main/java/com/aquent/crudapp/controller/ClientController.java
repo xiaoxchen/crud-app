@@ -78,12 +78,15 @@ public class ClientController {
      * @return redirect, or create view with errors
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public ModelAndView create(Client client, @RequestParam("checkbox")String[] checkboxValue) {
+    public ModelAndView create(Client client, @RequestParam(value = "checkbox", required = false) final String[] checkboxValue) {
         List<String> errors = clientService.validateClient(client);
         if (errors.isEmpty()) {
             int id = clientService.createClient(client);
-            Set<Integer> set = Arrays.stream(checkboxValue)
-                    .mapToInt((e) -> Integer.parseInt(e)).boxed().collect(Collectors.toSet());
+            Set<Integer> set = new HashSet<>();
+            if (checkboxValue != null && checkboxValue.length != 0){
+                set = Arrays.stream(checkboxValue)
+                        .mapToInt((e) -> Integer.parseInt(e)).boxed().collect(Collectors.toSet());
+            }
             for (Person person : personService.listPeople()){
                 if (set.contains(person.getPersonId())){
                     personService.updateClient(id, person.getPersonId());
@@ -142,12 +145,15 @@ public class ClientController {
      * @return redirect, or edit view with errors
      */
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public ModelAndView edit(Client client, @RequestParam("checkbox")String[] checkboxValue) {
+    public ModelAndView edit(Client client, @RequestParam(value = "checkbox", required = false) final String[] checkboxValue) {
         List<String> errors = clientService.validateClient(client);
         if (errors.isEmpty()) {
             clientService.updateClient(client);
-            Set<Integer> set = Arrays.stream(checkboxValue)
-                    .mapToInt((e) -> Integer.parseInt(e)).boxed().collect(Collectors.toSet());
+            Set<Integer> set = new HashSet<>();
+            if (checkboxValue != null && checkboxValue.length != 0){
+                set = Arrays.stream(checkboxValue)
+                        .mapToInt((e) -> Integer.parseInt(e)).boxed().collect(Collectors.toSet());
+            }
             for (Person person : personService.listPeople()){
                 if (set.contains(person.getPersonId())){
                     personService.updateClient(client.getId(), person.getPersonId());

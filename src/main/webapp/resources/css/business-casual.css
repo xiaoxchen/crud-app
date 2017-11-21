@@ -12,8 +12,12 @@ body {
   -o-background-size: cover;
 }
 
+.aicon {
+  color: #937c3d;
+}
+
 .bgpic {
-  background: url('/resources/picture/Wall.jpg') no-repeat center fixed;
+  background: url('/resources/picture/greywood.jpg') no-repeat center fixed;
   background-size: 100% 100%;
 }
 

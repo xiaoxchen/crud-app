@@ -129,7 +129,7 @@
                 </div>
 
             </div>
-            <button type="submit" class="bouton-contact">Send</button>
+            <button type="submit" class="bouton-contact">Submit</button>
         </form>
         <script type="text/javascript">
             $('#validationForm').validate();

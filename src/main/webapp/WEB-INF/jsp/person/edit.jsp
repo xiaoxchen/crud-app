@@ -12,13 +12,49 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="/resources/js/avatar.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.js"></script>
+        <!--Validation -->
         <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <!--icon CSS-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="/resources/css/avatar.css">
+        <link rel="stylesheet" type="text/css" href="/resources/css/tableStyle.css">
+        <link rel="stylesheet" href="/resources/css/business-casual.css" >
         <link rel="stylesheet" href="/resources/css/formStyle.css">
         <title>Edit Person</title>
     </head>
-    <body>
+    <body class="bgpic">
+        <div class="tagline-upper text-center text-heading text-shadow text-white mt-5 d-none d-lg-block">Business Casual</div>
+        <div class="tagline-lower text-center text-expanded text-uppercase text-color mb-5 d-none d-lg-block">480 Main Street | Malden, MA 90210</div>
+        <!-- Navgation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="/person/list">Person
+                        </a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="/client/list">Client
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="/about">about</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
         <c:if test="${fn:length(errors) gt 0}">
             <p>Please correct the following errors in your submission:</p>
             <ul>
@@ -94,7 +130,7 @@
                 </div>
 
             </div>
-            <button type="submit" class="bouton-contact">Send</button>
+            <button type="submit" class="bouton-contact">Submit</button>
 
         </form>
         <script type="text/javascript">

@@ -15,6 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="/resources/js/avatar.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -23,6 +24,9 @@
         <link rel="stylesheet" href="/resources/css/avatar.css">
         <link rel="stylesheet" type="text/css" href="/resources/css/tableStyle.css">
         <link rel="stylesheet" href="/resources/css/business-casual.css" >
+        <link rel="stylesheet" href="/resources/css/oButtonStyle.css">
+        <link rel="stylesheet" href="/resources/css/buttonStyle.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <title>Person Listing</title>
     </head>
@@ -56,8 +60,12 @@
 
         <div class="table-users">
             <div class="header">Person Listing</div>
-            <a href="${pageContext.request.contextPath}/person/create ">Create New Person</a>
-
+            <div class="text-center">
+                <div class="button">
+                    <a href="${pageContext.request.contextPath}/person/create "><span class="shift">Create New Person ›</span></a>
+                    <div class="mask"></div>
+                </div>
+            </div>
             <c:choose>
                 <c:when test="${fn:length(persons) gt 0}">
                     <table cellspacing="0">
@@ -79,8 +87,10 @@
                                 <td>${person.emailAddress}</td>
                                 <td>${person.clientName}</td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/person/edit/${person.personId}">Edit Person</a>
-                                    <a href="${pageContext.request.contextPath}/person/delete/${person.personId}">Delete Person</a>
+                                    <a class="btn aicon btn-default btn-sm" href="${pageContext.request.contextPath}/person/edit/${person.personId}">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a class="btn aicon btn-default btn-sm" href="${pageContext.request.contextPath}/person/delete/${person.personId}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

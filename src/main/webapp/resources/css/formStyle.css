@@ -13,11 +13,11 @@ body {
 }
 
 .info i {
-    color:#F6AA93;
+    color:#938572;
 }
 form h1 {
     font-size: 18px;
-    background: #F6AA93 none repeat scroll 0% 0%;
+    background: #938572 none repeat scroll 0% 0%;
     color: rgb(255, 255, 255);
     padding: 22px 25px;
     border-radius: 5px 5px 0px 0px;
@@ -102,7 +102,7 @@ i {
 }
 
 .bouton-contact{
-    background-color: #F6AA93;
+    background-color: #938572;
     color: #FFF;
     text-align: center;
     width: 100%;
