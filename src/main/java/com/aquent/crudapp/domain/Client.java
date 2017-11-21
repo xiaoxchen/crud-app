@@ -34,7 +34,7 @@ public class Client {
     @Size(min = 1, max = 50, message = "City is required with maximum length of 50")
     private String city;
     @NotNull
-    @Pattern(regexp = "[A-Z]{2}", message = "State is required two uppercase characters")
+    @Pattern(regexp = "([A-Z]|[a-z]){2}", message = "State is required two characters")
     private String state;
     @NotNull
     @Pattern(regexp = "[0-9]{5}", message = "Please input valid zipcode")
